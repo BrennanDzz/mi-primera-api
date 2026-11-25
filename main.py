@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from psycopg.rows import dict_row
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 
@@ -19,6 +19,12 @@ def conectar():
 
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class Album(BaseModel):
